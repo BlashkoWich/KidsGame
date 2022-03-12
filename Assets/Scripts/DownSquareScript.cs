@@ -14,6 +14,9 @@ public class DownSquareScript : MonoBehaviour
     [SerializeField]
     private Color _greenColor;
 
+    private int scoresOnClick;
+    public int ScoresOnClick => scoresOnClick;
+
     private ScoreController _scoreController;
 
     private bool isActivate;
@@ -67,7 +70,7 @@ public class DownSquareScript : MonoBehaviour
         StartCoroutine(ActivateSquare());
     }
 
-    public void OnMouseDown()
+    private void OnMouseDown()
     {
         if(isActivate == true)
         {

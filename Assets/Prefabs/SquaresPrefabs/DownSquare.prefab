@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5487450982351438905}
   - component: {fileID: 5156818637611695418}
   m_Layer: 0
-  m_Name: Square(1) (3)
+  m_Name: DownSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

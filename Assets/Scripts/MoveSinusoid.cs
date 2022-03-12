@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class MoveSinusoid : MonoBehaviour
 {
+    private Vector3 startPosition;
+    private Vector3 finishPosition;
+
+    public void Initialize(Vector2 start, Vector2 finish)
+    {
+        startPosition = start;
+        finishPosition = finish;
+    }
+    private void Update()
+    {
+        WaveLerp(startPosition, finishPosition);
+    }
     private Vector2 WaveLerp(Vector2 a, Vector2 b)
     {
         float time = Random.Range(3f, 6f);

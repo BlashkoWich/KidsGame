@@ -31,3 +31,8 @@ public enum SquareTypes
     Orange,
     Red
 }
+public enum DirectionOfMovement
+{
+    LeftToRight,
+    RightToLeft
+}

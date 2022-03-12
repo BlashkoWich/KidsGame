@@ -6,6 +6,7 @@ public class SelectSquareType : MonoBehaviour
 {
     private SquareTypes _currentSquareType;
     private int scoresOnClick;
+    public int ScoresOnClick => scoresOnClick;
     private Color32 color;
     private void Start()
     {
