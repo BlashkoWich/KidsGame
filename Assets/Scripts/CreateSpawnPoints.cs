@@ -29,10 +29,6 @@ public class CreateSpawnPoints : MonoBehaviour
         bottomRight -= new Vector2(0, -3);
         topLeft = camera.ScreenToWorldPoint(new Vector2 (0, height));
         topRight = camera.ScreenToWorldPoint(new Vector2 (width, height));
-        
-        Debug.Log(bottomLeft + "BottomLeft");
-        Debug.Log(bottomRight + "BottomRight");
-        Debug.Log(topLeft + "TopLeft");
-        Debug.Log(topRight + "TopRight");
+
     }
 }

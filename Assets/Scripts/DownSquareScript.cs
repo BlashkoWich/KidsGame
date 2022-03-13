@@ -41,7 +41,6 @@ public class DownSquareScript : MonoBehaviour
     {
         if(isActivate)
         {
-            Debug.Log("OnStart");
             StartCoroutine(ActivateSquare());
         }
     }
