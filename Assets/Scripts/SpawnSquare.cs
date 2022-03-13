@@ -28,6 +28,10 @@ public class SpawnSquare : MonoBehaviour
         {
             StartCoroutine(Spawn());
         }
+        else
+        {
+            StopAllCoroutines();
+        }
     }
     private IEnumerator Spawn()
     {

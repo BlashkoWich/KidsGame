@@ -22,6 +22,11 @@ public class GlobalTouchController : MonoBehaviour
         {
             GlobalTouch();
         }
+        if(Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+        {
+            StopCoroutine(EndGame());
+            StartCoroutine(EndGame());
+        }    
     }
     private void GlobalTouch()
     {
@@ -30,5 +35,14 @@ public class GlobalTouchController : MonoBehaviour
         
         StartCoroutine(UIAnimations.TextInvisible(_touchScreenTxt));
         _startPanel.color = new Color(_startPanel.color.r, _startPanel.color.g, _startPanel.color.b, 0);
+    }
+
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(15);
+        StartCoroutine(UIAnimations.TextVisible(_touchScreenTxt));
+        _startPanel.color = new Color(_startPanel.color.r, _startPanel.color.g, _startPanel.color.b, 0.5f);
+        isStart = false;
+        StartGame?.Invoke(false);
     }
 }

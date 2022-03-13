@@ -43,6 +43,11 @@ public class DownSquareScript : MonoBehaviour
         {
             StartCoroutine(ActivateSquare());
         }
+        else
+        {
+            StopAllCoroutines();
+            DisactivateSquare(out float time);
+        }
     }
 
     private IEnumerator ActivateSquare()
@@ -57,16 +62,20 @@ public class DownSquareScript : MonoBehaviour
     private IEnumerator LifeSquare()
     {
         yield return new WaitForSeconds(5);
-        StartCoroutine(DisactivateSquare());
+        StartCoroutine(DisactivateTimer());
     }
-    private IEnumerator DisactivateSquare()
+    private IEnumerator DisactivateTimer()
+    {
+       DisactivateSquare(out float time);
+        yield return new WaitForSeconds(time);
+        StartCoroutine(ActivateSquare());
+    }
+    private void DisactivateSquare(out float time)
     {
         isActivate = false;
         _particleSystem.Stop();
-        float time = 0.5f;
+        time = 0.5f;
         StartCoroutine(UIAnimations.SpriteColorChange(_spriteRenderer, _purpleColor, _greenColor, time));
-        yield return new WaitForSeconds(time);
-        StartCoroutine(ActivateSquare());
     }
 
     private void OnMouseDown()
@@ -75,7 +84,7 @@ public class DownSquareScript : MonoBehaviour
         {
             _scoreController.ScoreChange(100);
             StopAllCoroutines();
-            StartCoroutine(DisactivateSquare());
+            StartCoroutine(DisactivateTimer());
         }
     }
 }
