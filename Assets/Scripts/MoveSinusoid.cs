@@ -4,42 +4,30 @@ using UnityEngine;
 
 public class MoveSinusoid : MonoBehaviour
 {
-    private Vector3 startPosition;
-    private Vector3 finishPosition;
-
-    public void Initialize(Vector2 start, Vector2 finish)
+    private Rigidbody2D rigidbody;
+    public void Initialize(DirectionOfMovement directionOfMovement)
     {
-        startPosition = start;
-        finishPosition = finish;
+        rigidbody = GetComponent<Rigidbody2D>();
+        float time = Random.Range(4, 7);
+        StartCoroutine(WaveLerp(directionOfMovement));
+        StartCoroutine(AddForce(time));
     }
-    private void Update()
+    private IEnumerator WaveLerp(DirectionOfMovement directionOfMovement)
     {
-        WaveLerp(startPosition, finishPosition);
+        if(directionOfMovement == DirectionOfMovement.LeftToRight)
+        {
+            rigidbody.AddForce(Vector2.right * 50);
+        }
+        else if(directionOfMovement == DirectionOfMovement.RightToLeft)
+        {
+            rigidbody.AddForce(Vector2.left * 50);
+        }
+        yield return new WaitForSeconds(1);
     }
-    private Vector2 WaveLerp(Vector2 a, Vector2 b)
-    {
-        float time = Random.Range(3f, 6f);
-        float smooth = 0.5f;
-        float freq = 1f;
-        float waveScale = 1f;
- 
-        if (time <= smooth)
-        {
-            waveScale *= time / smooth;
-        }
-        else if (time > 1f - smooth)
-        {
-            waveScale *= (1f - time) / smooth;
-        }
- 
- 
-        Vector2 result = Vector2.Lerp(a, b, time);
- 
-        Vector2 dir = (b - a).normalized;
-        Vector2 leftNormal = result + new Vector2(-dir.y, dir.x) * waveScale;
- 
-        result = Vector2.LerpUnclamped(result, leftNormal, Mathf.Sin(time * freq));
- 
-        return result;
+    private IEnumerator AddForce(float time)
+    {;
+        rigidbody.AddForce( new Vector2(0, Random.Range(-20, 20)));
+        yield return new WaitForSeconds (1);
+        StartCoroutine(AddForce(time));
     }
 }

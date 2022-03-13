@@ -28,13 +28,11 @@ public static class UIAnimations
 
     public static IEnumerator SpriteColorChange(SpriteRenderer spriteRenderer, Color startColor, Color finishColor, float time)
     {
-        Debug.Log("start");
         spriteRenderer.color = startColor;
         for (float i = 0; i < time; i += 0.02f)
         {
             spriteRenderer.color = Color.Lerp(startColor, finishColor, i/time);
             yield return new WaitForSeconds(0.02f);
         }
-        Debug.Log("end");
     }
 }

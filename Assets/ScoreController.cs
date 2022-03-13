@@ -16,6 +16,10 @@ public class ScoreController : MonoBehaviour
     public void ScoreChange(int newScore)
     {
         _currentScore += newScore;
+        if(_currentScore < 0)
+        {
+            _currentScore = 0;
+        }
         ScoreChangedEvent?.Invoke(_currentScore);
     }
 }

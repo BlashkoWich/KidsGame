@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DownSquareScript : MonoBehaviour
 {
-    private SpriteRenderer _goSprite;
+    private SpriteRenderer _spriteRenderer;
     [SerializeField]
     private ParticleSystem _particleSystem;
 
@@ -33,8 +33,8 @@ public class DownSquareScript : MonoBehaviour
     private void Start()
     {
         _scoreController = FindObjectOfType<ScoreController>();
-        _goSprite = GetComponent<SpriteRenderer>();
-        _goSprite.color = _purpleColor;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.color = _purpleColor;
     }
 
     private void OnStartGame(bool isActivate)
@@ -49,7 +49,7 @@ public class DownSquareScript : MonoBehaviour
     private IEnumerator ActivateSquare()
     {
         float time = Random.Range(4f, 7f);
-        StartCoroutine(UIAnimations.SpriteColorChange(_goSprite, _purpleColor, _greenColor, time));
+        StartCoroutine(UIAnimations.SpriteColorChange(_spriteRenderer, _purpleColor, _greenColor, time));
         yield return new WaitForSeconds(time);
         isActivate = true;
         _particleSystem.Play();
@@ -65,7 +65,7 @@ public class DownSquareScript : MonoBehaviour
         isActivate = false;
         _particleSystem.Stop();
         float time = 0.5f;
-        StartCoroutine(UIAnimations.SpriteColorChange(_goSprite, _purpleColor, _greenColor, time));
+        StartCoroutine(UIAnimations.SpriteColorChange(_spriteRenderer, _purpleColor, _greenColor, time));
         yield return new WaitForSeconds(time);
         StartCoroutine(ActivateSquare());
     }

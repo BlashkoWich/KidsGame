@@ -5,9 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(LocalTouchChecker))]
 public class AfterClick : MonoBehaviour
 {
+    [SerializeField]
     private LocalTouchChecker _localTouchChecker;
     
     [SerializeField] private Color _finishColor;
+
+    private BoxCollider2D collider2D;
+
+    private int _scoresOnClick;
+
+    private SelectSquareType _selectSquareType;
+    private ScoreController _scoreController;
+    private SpriteRenderer _spriteRenderer;
     private void OnEnable()
     {
         _localTouchChecker.IsClick += IsClick;
@@ -18,13 +27,18 @@ public class AfterClick : MonoBehaviour
     }
     private void Start()
     {
-        _localTouchChecker = GetComponent<LocalTouchChecker>();
+        collider2D = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _scoreController = FindObjectOfType<ScoreController>();
+        _selectSquareType = GetComponent<SelectSquareType>();
+        _scoresOnClick = _selectSquareType.ScoresOnClick;
     }
     
     private void IsClick()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        StartCoroutine(UIAnimations.SpriteColorChange(spriteRenderer, spriteRenderer.color, _finishColor, 1));
+        collider2D.enabled = false;
+        _scoreController.ScoreChange(_scoresOnClick);
+        StartCoroutine(UIAnimations.SpriteColorChange(_spriteRenderer, _spriteRenderer.color, _finishColor, 1));
         DestroyGameObject();
     }
 

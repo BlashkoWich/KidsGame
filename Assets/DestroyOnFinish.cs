@@ -18,11 +18,11 @@ public class DestroyOnFinish : MonoBehaviour
     }
     private void DestroyGameOnject()
     {
-        if(direction == DirectionOfMovement.LeftToRight && transform.position.x >= finishPosition + 3)
+        if(direction == DirectionOfMovement.LeftToRight && transform.position.x >= finishPosition)
         {
             Destroy(gameObject);
         }
-        else if(direction == DirectionOfMovement.RightToLeft && transform.position.x <= finishPosition - 3)
+        else if(direction == DirectionOfMovement.RightToLeft && transform.position.x <= finishPosition)
         {
             Destroy(gameObject);
         }
